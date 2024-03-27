@@ -6,7 +6,6 @@ import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
 
-import * as DOMPurify from "dompurify";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 

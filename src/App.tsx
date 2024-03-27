@@ -1,5 +1,6 @@
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 import ProblemDescription from "./pages/ProblemDescription/ProblemDescription";
-
 function App() {
   const markdownText = `
   #  Welcome to StackEdit!
@@ -9,6 +10,8 @@ function App() {
   `;
   return (
     <>
+      <Navbar/>
+      <Sidebar/>
       <ProblemDescription description={markdownText}/>
     </>
   );
