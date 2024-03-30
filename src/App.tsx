@@ -11,11 +11,11 @@ ace.config.set("themePath", "");
 function App() {
 
   return (
-    <>
+    <div className="overflow-hidden">
       <Navbar />
       <Sidebar />
       <ProblemDescription descriptionText={SampleProlbem1.problemStatement} />
-    </>
+    </div>
   );
 }
 
