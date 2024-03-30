@@ -44,7 +44,7 @@ function Description({ descriptionText }: { descriptionText: string }) {
   const [isDragging, setIsDragging] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [selectedTheme, setSelectedTheme] = useState("monokai");
-
+  const [testCaseTab, setTestCaseTab] = useState("input");
   const startDragging = (e: { preventDefault: () => void }) => {
     setIsDragging(true);
     e.preventDefault();
@@ -68,6 +68,14 @@ function Description({ descriptionText }: { descriptionText: string }) {
 
   const isActiveTab = (tabName: string) => {
     if (activeTab === tabName) {
+      return "tab tab-active";
+    } else {
+      return "tab";
+    }
+  };
+
+  const isInputTabActive = (tabName: string) => {
+    if (testCaseTab === tabName) {
       return "tab tab-active";
     } else {
       return "tab";
@@ -124,7 +132,7 @@ function Description({ descriptionText }: { descriptionText: string }) {
         className="rightPanel h-full overflow-auto"
         style={{ width: `${100 - leftWidth}%` }}
       >
-        <div className="flex ml-2 mb-2 gap-2">
+        <div className="flex mb-2 gap-2">
           <div>
             <button className="btn btn-success btn-sm  rounded-xl">Run</button>
           </div>
@@ -151,7 +159,11 @@ function Description({ descriptionText }: { descriptionText: string }) {
           </div>
 
           <div>
-            <select className="select select-info  select-sm  rounded-xl  w-full max-w-xs"  value={selectedTheme} onChange={(e)=>setSelectedTheme(e.target.value)}>
+            <select
+              className="select select-info  select-sm  rounded-xl  w-full max-w-xs"
+              value={selectedTheme}
+              onChange={(e) => setSelectedTheme(e.target.value)}
+            >
               {Themes.map((theme: themeStyle) => (
                 <option key={theme.value} value={theme.value}>
                   {" "}
@@ -162,7 +174,7 @@ function Description({ descriptionText }: { descriptionText: string }) {
           </div>
         </div>
 
-        <div className="editorContainer">
+        <div className="editorContainer mt-3">
           <AceEditor
             mode={selectedLanguage}
             theme={selectedTheme}
@@ -176,6 +188,43 @@ function Description({ descriptionText }: { descriptionText: string }) {
               fontSize: 16,
             }}
           />
+        </div>
+
+        {/* Collapsable test case part */}
+
+        <div className="collapse bg-base-200 rounded-none">
+          <input type="checkbox" className="peer" />
+          <div className="collapse-title bg-primary text-primary-content">
+            Console
+          </div>
+          <div className="collapse-content bg-primary text-primary-content">
+            <div role="tablist" className="tabs tabs-boxed w-3/5 mb-4">
+              <a
+                onClick={() => setTestCaseTab("input")}
+                role="tab"
+                className={isInputTabActive("input")}
+              >
+                Input
+              </a>
+              <a
+                onClick={() => setTestCaseTab("output")}
+                role="tab"
+                className={isInputTabActive("output")}
+              >
+                Output
+              </a>
+            </div>
+
+            {testCaseTab === "input" ? (
+              <textarea
+                rows={4}
+                cols={70}
+                className="bg-neutral text-white rounded-md resize-none"
+              />
+            ) : (
+              <div className="w-12 h-8"></div>
+            )}
+          </div>
         </div>
       </div>
     </div>
