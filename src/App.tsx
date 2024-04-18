@@ -11,7 +11,7 @@ ace.config.set("themePath", "");
 function App() {
 
   return (
-    <div className="overflow-hidden">
+    <div className="h-[100vh] overflow-hidden">
       <Navbar />
       <Sidebar />
       <ProblemDescription descriptionText={SampleProlbem1.problemStatement} />
